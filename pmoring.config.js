@@ -7,6 +7,7 @@ export default {
     { host: 'thinliquid.dev', username: 'thinliquid' },
     { host: 'maxpixels.moe', username: 'maxpixels' }
   ],
+  default: { host: `you're not in the webring`, username: '...' },
 
   /*
   * {item} - Current item in the list
