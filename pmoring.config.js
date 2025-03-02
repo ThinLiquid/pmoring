@@ -10,11 +10,6 @@ export default {
   default: { host: `you're not in the webring`, username: '...' },
 
   /*
-  * {item} - Current item in the list
-  * {prev} - Previous item in the list
-  * {next} - Next item in the list
-  * {index} - Current host index
-  * 
   * You can also use keys from the list object
   * Example: {list["username"]}, will give you
   * the value of the key "username" from the

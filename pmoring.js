@@ -2,7 +2,7 @@
   let $ = (await import('./pmoring.config.js')).default,
     h = $.value,
     i = $.list.findIndex(v => v[$.match] === h),
-    ctx = { prev: $.list.at(i - 1), next: $.list.at(i + 1), index: i };
+    ctx = { prev: $.list.at(i - 1), next: $.list.at(i + 1), index: i, random: $.list[Math.floor(Math.random() * $.list.length)] };
 
   ctx.item = i < 0 ? $.default : $.list[i];
 
