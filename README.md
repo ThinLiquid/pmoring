@@ -1,6 +1,8 @@
 # pmoring
 > (wish it was written in ts :sob:)<br>
 > all you really need is two files.
+
+demo: https://thinliquid.github.io/pmoring/example.html
 ## why do we need yet another webring script??
 1. a lot of other webring scripts are bloated
 2. webrings should be easy to customize
