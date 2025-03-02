@@ -5,6 +5,10 @@
 demo: https://thinliquid.github.io/pmoring/example.html.
 
 ts is very real. DM @thnlqd on discord to join.
+```html
+<link rel="stylesheet" href="https://thinliquid.github.io/pmoring/pmoring.css" />
+<script src="https://thinliquid.github.io/pmoring/pmoring.js"></script>
+```
 ## why do we need yet another webring script??
 1. a lot of other webring scripts are bloated
 2. webrings should be easy to customize

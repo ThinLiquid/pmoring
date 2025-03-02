@@ -1,1 +1,34 @@
-#pmoring{display:inline-flex;gap:10px;font-family:Arial Narrow;background:#8ACE00;color:black;padding:10px;&>*{filter:blur(0.5px)}}
+#pmoring{
+  display:inline-flex;
+  gap:10px;
+  font-family:Arial Narrow;
+  background:#8ACE00;
+  color:black;
+  padding:10px;
+  position:relative;
+
+  &::after {
+    content:"💢";
+    position:absolute;
+    top:-20px;
+    right:-20px;
+    font-size:35px;
+    animation:pmoring 1s infinite;
+  }
+
+  & > * {
+    filter:blur(0.5px)
+  }
+}
+
+@keyframes pmoring {
+  0% {
+    transform:rotate(0deg) scale(1);
+  }
+  50% {
+    transform:rotate(10deg) scale(1.5);
+  }
+  100% {
+    transform:rotate(0deg) scale(1);
+  }
+}
