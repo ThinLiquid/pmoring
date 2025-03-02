@@ -3,7 +3,7 @@ export default {
   value: location.host,
 
   list: [
-    { host: 'localhost:8080', username: 'test' },
+    { host: 'thinliquid.github.io', username: 'github' },
     { host: 'thinliquid.dev', username: 'thinliquid' },
     { host: 'maxpixels.moe', username: 'maxpixels' }
   ],
