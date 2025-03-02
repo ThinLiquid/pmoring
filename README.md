@@ -11,3 +11,5 @@ check out `example.html` and `pmoring.config.js` its that simple.
 - `prev`: The previous item in the list
 - `next`: The next item in the list
 - `index`: The current index of the item in the list
+
+> **Note:** `pmoring.js` and `pmoring.config.js` have to be in the same directory.
