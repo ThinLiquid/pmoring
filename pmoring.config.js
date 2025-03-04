@@ -36,12 +36,14 @@ export default {
       padding:10px;
       position:relative;
       font-family: Arial, sans-serif;
+      overflow: 
 
       &::after {
         content:"💢";
         position:absolute;
+        z-index:10;
         top:-20px;
-        right:-20px;
+        left:-20px;
         font-size:35px;
         transform:rotate(21deg) scale(1.25);
       }
