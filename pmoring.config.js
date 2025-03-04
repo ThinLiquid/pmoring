@@ -36,7 +36,6 @@ export default {
       padding:10px;
       position:relative;
       font-family: Arial, sans-serif;
-      overflow: 
 
       &::after {
         content:"💢";
