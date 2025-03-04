@@ -1,4 +1,8 @@
 ;(async (s) => {
+  let config = (await import('https://thinliquid.github.io/pmoring/pmoring.config.js')).default,
+    h = config.value,
+    i = config.list.findIndex(v => v[config.match] === h);
+    
   function extractAllContentBetweenBraces(str) {
     const contents = [];
     let current = '';
@@ -45,10 +49,6 @@
     }
     return str;
   }
-
-  let config = (await import('./pmoring.config.js')).default,
-    h = config.value,
-    i = config.list.findIndex(v => v[config.match] === h);
 
   let widgetHtml = config.defaultWidget;
   if (i > -1) {

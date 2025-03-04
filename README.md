@@ -28,4 +28,4 @@ This is just a basic example, which gets ListenBrainz data
 </span>
 ```
 
-> **Note:** `pmoring.js` and `pmoring.config.js` have to be in the same directory.
+> **Note:** you must change the import URL of the config file in `pmoring.js`
