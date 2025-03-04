@@ -3,16 +3,13 @@ export default {
   value: location.host,
 
   list: [
-    { host: '127.0.0.1:8080', username: 'thnlqd'},
-    { host: 'thinliquid.github.io', username: 'thnlqd' },
     { host: 'thinliquid.dev', username: 'thnlqd' },
-    { host: 'maxpixels.moe', username: 'maxpixels' }
   ],
   
   defaultWidget: `
     <div>
       <b>Join the webring!</b><br/>
-      <span>Ask someone to add you to the list.</span>
+      <span>Ask @thnlqd to add you to the list.</span>
     </div>
   `,
 
