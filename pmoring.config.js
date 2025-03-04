@@ -8,14 +8,14 @@ export default {
     { host: 'thinliquid.dev', username: 'thnlqd' },
     { host: 'maxpixels.moe', username: 'maxpixels' }
   ],
-  default: { host: `you're not in the webring`, username: '...' },
+  
+  defaultWidget: `
+    <div>
+      <b>Join the webring!</b><br/>
+      <span>Ask someone to add you to the list.</span>
+    </div>
+  `,
 
-  /*
-  * You can also use keys from the list object
-  * Example: {list["username"]}, will give you
-  * the value of the key "username" from the
-  * list object
-  */
   widget: `
     <div>
       <b>{item.host} ({item.username})</b><br/>

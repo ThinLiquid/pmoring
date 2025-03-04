@@ -4,9 +4,7 @@
     let current = '';
     let depth = 0;
   
-    for (let i = 0; i < str.length; i++) {
-      const char = str[i];
-  
+    for (const char of str) {
       if (char === '{') {
         // When we see an opening brace,
         // if we're already inside a block, include it.
@@ -49,31 +47,34 @@
   }
 
   let config = (await import('./pmoring.config.js')).default,
-      h = config.value,
-      i = config.list.findIndex(v => v[config.match] === h),
-      ctx = {
-        prev: config.list.at(i - 1),
-        next: config.list.at(i + 1),
-        index: i,
-        random: config.list[Math.floor(Math.random() * config.list.length)],
-        list: config.list
-      };
+    h = config.value,
+    i = config.list.findIndex(v => v[config.match] === h);
 
-  ctx.item = i < 0 ? config.default : config.list[i];
+  let widgetHtml = config.defaultWidget;
+  if (i > -1) {
+    const ctx = {
+      prev: config.list.at(i - 1),
+      next: config.list.at(i + 1),
+      index: i,
+      random: config.list[Math.floor(Math.random() * config.list.length)],
+      list: config.list,
+      item: config.list[i]
+    };
 
-  async function evaluateExpression(expr) {
-    const keys = Object.keys(ctx);
-    const values = Object.values(ctx);
-    try {
-      const asyncFunc = new Function(...keys, `return (async () => { return ${expr} })();`);
-      return await asyncFunc(...values);
-    } catch (error) {
-      console.error("Error evaluating expression:", expr, error);
-      return "";
+    async function evaluateExpression(expr) {
+      const keys = Object.keys(ctx);
+      const values = Object.values(ctx);
+      try {
+        const asyncFunc = new Function(...keys, `return (async () => { return ${expr} })();`);
+        return await asyncFunc(...values);
+      } catch (error) {
+        console.error("Error evaluating expression:", expr, error);
+        return "";
+      }
     }
-  }
 
-  const widgetHtml = await asyncReplace(config.widget, evaluateExpression);
+    widgetHtml = await asyncReplace(config.widget, evaluateExpression);
+  }
 
   const widget = document.createElement('div');
   widget.id = 'pmoring';
