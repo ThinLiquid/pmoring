@@ -1,11 +1,90 @@
-(async (s) => {
-  let $ = (await import('./pmoring.config.js')).default,
-    h = $.value,
-    i = $.list.findIndex(v => v[$.match] === h),
-    ctx = { prev: $.list.at(i - 1), next: $.list.at(i + 1), index: i, random: $.list[Math.floor(Math.random() * $.list.length)] };
+;(async (s) => {
+  function extractAllContentBetweenBraces(str) {
+    const contents = [];
+    let current = '';
+    let depth = 0;
+  
+    for (let i = 0; i < str.length; i++) {
+      const char = str[i];
+  
+      if (char === '{') {
+        // When we see an opening brace,
+        // if we're already inside a block, include it.
+        if (depth > 0) {
+          current += char;
+        }
+        depth++;
+        // When entering a top-level block, reset the current content.
+        if (depth === 1) {
+          current = '';
+        }
+      } else if (char === '}') {
+        depth--;
+        // If we're closing a top-level block, push the accumulated content.
+        if (depth === 0) {
+          contents.push(current);
+        } else {
+          // Otherwise, if it's a nested block, include the closing brace.
+          current += char;
+        }
+      } else {
+        // Only accumulate characters if we're inside a block.
+        if (depth > 0) {
+          current += char;
+        }
+      }
+    }
+  
+    return contents;
+  }  
 
-  ctx.item = i < 0 ? $.default : $.list[i];
+  async function asyncReplace(str, asyncFn) {
+    const matches = extractAllContentBetweenBraces(str);
+    console.log(matches)
+    const replacements = await Promise.all(matches.map(m => asyncFn(m.trim())));
+    for (let i = 0; i < matches.length; i++) {
+      str = str.replace(`{${matches[i]}}`, replacements[i]);
+    }
+    return str;
+  }
 
-  s?.parentElement?.insertAdjacentHTML('beforeend',$.widget.replace(/\{([\w\[\]'.]+)\}/g,(_,k)=>k.split(/\.|\[["']/).reduce((a,k)=>a[k],ctx))),
-  s?.remove()
+  let config = (await import('./pmoring.config.js')).default,
+      h = config.value,
+      i = config.list.findIndex(v => v[config.match] === h),
+      ctx = {
+        prev: config.list.at(i - 1),
+        next: config.list.at(i + 1),
+        index: i,
+        random: config.list[Math.floor(Math.random() * config.list.length)],
+        list: config.list
+      };
+
+  ctx.item = i < 0 ? config.default : config.list[i];
+
+  async function evaluateExpression(expr) {
+    const keys = Object.keys(ctx);
+    const values = Object.values(ctx);
+    try {
+      const asyncFunc = new Function(...keys, `return (async () => { return ${expr} })();`);
+      return await asyncFunc(...values);
+    } catch (error) {
+      console.error("Error evaluating expression:", expr, error);
+      return "";
+    }
+  }
+
+  const widgetHtml = await asyncReplace(config.widget, evaluateExpression);
+
+  const widget = document.createElement('div');
+  widget.id = 'pmoring';
+  widget.dataset.pmoId = crypto.randomUUID();
+  widget.innerHTML = widgetHtml;
+  widget.classList.value = `${s?.classList.value}`
+  s?.parentElement?.insertBefore(widget, s);
+
+  const style = document.createElement('style');
+  style.innerHTML = config.style.replace(/:webring/g, `*[data-pmo-id="${widget.dataset.pmoId}"]`);
+  document.head.appendChild(style);
+
+  s?.remove();
 })(document.currentScript);
