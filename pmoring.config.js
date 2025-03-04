@@ -33,7 +33,6 @@ export default {
 
   style: `
     :webring {
-      color:black;
       padding:10px;
       position:relative;
       font-family: Arial, sans-serif;
@@ -50,6 +49,7 @@ export default {
       &.brat {
         background:#8ACE00;
         font-family:Arial Narrow;
+        color:black;
 
         & > * {
           filter:blur(0.5px)
