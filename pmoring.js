@@ -10,30 +10,22 @@
   
     for (const char of str) {
       if (char === '{') {
-        // When we see an opening brace,
-        // if we're already inside a block, include it.
         if (depth > 0) {
           current += char;
         }
         depth++;
-        // When entering a top-level block, reset the current content.
         if (depth === 1) {
           current = '';
         }
       } else if (char === '}') {
         depth--;
-        // If we're closing a top-level block, push the accumulated content.
         if (depth === 0) {
           contents.push(current);
         } else {
-          // Otherwise, if it's a nested block, include the closing brace.
           current += char;
         }
-      } else {
-        // Only accumulate characters if we're inside a block.
-        if (depth > 0) {
-          current += char;
-        }
+      } else if (depth > 0) {
+        current += char;
       }
     }
   
