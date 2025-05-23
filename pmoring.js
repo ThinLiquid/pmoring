@@ -2,7 +2,7 @@
 // check https://github.com/ThinLiquid/pmoring for the latest version
 
 ;(async (s) => {
-  let config = (await import('https://thinliquid.github.io/pmoring/pmoring.config.js')).default,
+  let config = (await import('https://[your url]/pmoring.config.js')).default,
     h = config.value,
     i = config.list.findIndex(v => v[config.match] === h);
     
@@ -37,7 +37,6 @@
 
   async function asyncReplace(str, asyncFn) {
     const matches = extractAllContentBetweenBraces(str);
-    console.log(matches)
     const replacements = await Promise.all(matches.map(m => asyncFn(m.trim())));
     for (let i = 0; i < matches.length; i++) {
       str = str.replace(`{${matches[i]}}`, replacements[i]);
@@ -46,7 +45,7 @@
   }
 
   let widgetHtml = config.defaultWidget;
-  if (i > -1) {
+  if (i > -1 && s != null) {
     const ctx = {
       prev: config.list.at(i - 1),
       next: config.list.at(i + 1),
@@ -54,7 +53,8 @@
       random: config.list[Math.floor(Math.random() * config.list.length)],
       list: config.list,
       item: config.list[i],
-      config
+      config,
+      dataset: s.dataset
     };
 
     async function evaluateExpression(expr) {
