@@ -16,6 +16,8 @@ check out `example.html` and `pmoring.config.js` its that simple.
 - `index`: The current index of the item in the list
 - `random`: A random item in the list
 - `list`: The entire list
+- `config`: The entire config's json content
+- `dataset`: The entire dataset of the script (e.g. `data-type`). See https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset.
 ### using inline functions
 This is just a basic example, which gets ListenBrainz data
 ```jsx
