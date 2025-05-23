@@ -1,3 +1,6 @@
+// v1.1.0
+// check https://github.com/ThinLiquid/pmoring for the latest version
+
 ;(async (s) => {
   let config = (await import('https://thinliquid.github.io/pmoring/pmoring.config.js')).default,
     h = config.value,
