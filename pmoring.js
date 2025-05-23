@@ -50,7 +50,8 @@
       index: i,
       random: config.list[Math.floor(Math.random() * config.list.length)],
       list: config.list,
-      item: config.list[i]
+      item: config.list[i],
+      config
     };
 
     async function evaluateExpression(expr) {
